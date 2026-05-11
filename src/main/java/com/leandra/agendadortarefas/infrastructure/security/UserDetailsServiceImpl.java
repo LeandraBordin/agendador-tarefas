@@ -1,6 +1,4 @@
 package com.leandra.agendadortarefas.infrastructure.security;
-
-
 import com.leandra.agendadortarefas.business.dto.UsuarioDTO;
 import com.leandra.agendadortarefas.infrastructure.client.UsuarioClient;
 import org.springframework.beans.factory.annotation.Autowired;

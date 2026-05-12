@@ -2,6 +2,7 @@ package com.leandra.agendadortarefas.controller;
 
 import com.leandra.agendadortarefas.business.TarefasService;
 import com.leandra.agendadortarefas.business.dto.TarefasDTO;
+import com.leandra.agendadortarefas.infrastructure.enums.Status;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,5 +32,18 @@ public class TarefasController {
     @GetMapping
     public ResponseEntity<List<TarefasDTO>> buscaListaDeTarefasPorEmail(@RequestHeader("Authorization") String token){
         return  ResponseEntity.ok(tarefasService.buscaTarefasAgendadasPorEmail(token));
+    }
+    @DeleteMapping
+    public ResponseEntity<Void> deletaTarefasPorId(@RequestParam("id") String id){
+        tarefasService.deletaTarefaPorID(id);
+        return ResponseEntity.ok().build();
+    }
+    @PatchMapping
+    public ResponseEntity<TarefasDTO> alteraStatusNotificacao(@RequestParam("status")Status status, @RequestParam("id") String id){
+        return ResponseEntity.ok(tarefasService.alteraStatus(status, id));
+    }
+    @PutMapping
+    public ResponseEntity<TarefasDTO> updateTarefas(@RequestBody TarefasDTO tarefasDTO, @RequestParam("id") String id){
+        return ResponseEntity.ok(tarefasService.updateTarefas(tarefasDTO,id));
     }
 }
